@@ -1,18 +1,22 @@
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+import numpy as np
+import folium
+import re
 
 def bbc_weather_scraper(url):
   '''
-  This function is a web scraper that obtains the current weather data in a specific city from a provided bbc weather url. The expected output is a list containing the city name, maximum temperature, minimum temperature and description of current conditions. All values are returned as strings.
+  This function is a web scraper that obtains the current weather data in a specific city from a provided bbc weather url. The expected output is a list containing the city name, maximum temperature and description of current conditions. All values are returned as strings.
 
   Input: 
   url(str) of the form : "https://www.bbc.com/weather/xxxxxxx".
   Output: 
-  str array of the fomr: [City, max_temp, min_temp, description] 
+  array of the fomr: [City(str), max_temp (int), description (str)] 
   
   Example functionality:
   input:'https://www.bbc.com/weather/2988507'
-  output: ['Paris', ['14°'], ['9°'], ['Sunny and light winds']]
+  output: ['Paris', 14, ['Sunny and light winds']]
   '''
   #reading of the url
   # A url was chosen as an input instead of a city name because weather websites do not index their results by city name and this makes them much more difficult to scrape.
@@ -24,10 +28,15 @@ def bbc_weather_scraper(url):
   location=doc.find(class_='wr-c-location__name gel-paragon')
   city=location.contents[0].strip()
   #finding description and temperature values
-  description= clasa.find(class_="wr-day__details__weather-type-description")
-  temperature= clasa.find_all(class_="wr-value--temperature--c")
+  desc= clasa.find(class_="wr-day__details__weather-type-description")
+  temperature= clasa.find(class_="wr-value--temperature--c")
+  #selecting the temperature as an integer from a string
+  description=desc.contents[0].strip()
+  num_temp = re.search(r'\d+', str(temperature.contents))
+  if num_temp:
+    temp=int(num_temp.group())
   #constructing the final results vector
-  results = [city,temperature[0].contents,temperature[1].contents,description.contents]
+  results = [city,temp,description]
   return results
 
 def dutch_coordinates(city):
@@ -48,10 +57,10 @@ def dutch_coordinates(city):
   processed_cooridnates = [float(a) for a in list_coordinates]
   return processed_cooridnates
 
-
-
-url_list=['https://www.bbc.com/weather/2653743','https://www.bbc.com/weather/3117735','https://www.bbc.com/weather/2988507']
-
-current_conditions = bbc_weather_scraper(url_list[2])
-print (current_conditions)
-
+def weather_array_stacker(url_list):
+  index=len(url_list)#determining number of possible results
+  stacked_results=np.empty((0,3))#initialising final result
+  for i in range(index):
+    current=bbc_weather_scraper(url_list[i])#determining values for each url
+    stacked_results=np.vstack([stacked_results,current])#creating a matrix with weather data for all cities
+  return stacked_results
