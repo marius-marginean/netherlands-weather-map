@@ -78,7 +78,7 @@ def weather_array_stacker(url_list):
 
 def map_generator(matrix):
   '''
-  Function that uses folium to create a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. Desplays the temperature in the correct location on the map. Colours number blue for temperature below 10 degrees Celsius, green for  under 20 degrees Celsius, and red for anything more. Clicking on the pop up provides information on weather conditions. Uses as an input the output of weather_array_stacker().
+  Function that uses folium to create a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. Displays the temperature in the correct location on the map. Colours number blue for temperature below 10 degrees Celsius, green for  under 20 degrees Celsius, and red for anything more. Clicking on the pop up provides information on weather conditions. Uses as an input the output of weather_array_stacker().
 
   Input: 
   A matrix of the form [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
