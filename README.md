@@ -6,8 +6,10 @@ The temperature values appear as numbers in the corresponding locations of the m
 The input to the entire program is an array of "https://www.bbc.com/weather/xxxxxxx" urls corresponding to cities in The Netherlands and the output is an html file that contains an interactive map with the current temperature and weather conditions in each city. In future versions, it is intended for the program to be able to display the weather in cities outside of the netherlands as well. It would also be prefered for the future input to be a list of city names, from which the urls can be generated. However, this proved difficult because bbc weather pages are indexed by a specific id number, not by city name. 
 
 Example : 
-Input: url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
+Input: 
+url_list=["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
 
-Output : <img width="298" alt="image" src="https://github.com/user-attachments/assets/eca7dd72-9c02-430d-bba8-916778bb52d0">
+Output : 
+<img width="298" alt="image" src="https://github.com/user-attachments/assets/eca7dd72-9c02-430d-bba8-916778bb52d0">
 
 
