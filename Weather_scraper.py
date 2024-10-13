@@ -83,7 +83,7 @@ def map_generator(matrix):
   Input: 
   A matrix of the form [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
   Output: 
-  creates an html file named 'netherlands_map_with_numbers.html' that can be run in a separate web browser
+  creates an html file named 'netherlands_weather_map.html' that can be run in a separate web browser
   '''
   netherlands_map = folium.Map(location=[52.3784, 4.9009], zoom_start=7)#location of the map
   index = len(matrix)#number of markers
@@ -101,7 +101,7 @@ def map_generator(matrix):
         popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Weather description is added to the pop up
         icon=folium.DivIcon(html=f'<div style="font-size: 16pt; color: {colour};">{matrix[i][1]}</div>')#uses temperature as number icon of the correct colour
     ).add_to(netherlands_map)
-  netherlands_map.save("netherlands_map_with_numbers.html")#saves complete map
+  netherlands_map.save("netherlands_weather_map.html")#saves complete map
   return
   
 url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
