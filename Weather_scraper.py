@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
 import numpy as np
 import folium
 import re
@@ -58,9 +57,43 @@ def dutch_coordinates(city):
   return processed_cooridnates
 
 def weather_array_stacker(url_list):
+  '''
+  
+  '''
   index=len(url_list)#determining number of possible results
-  stacked_results=np.empty((0,3))#initialising final result
+  stacked_results=np.empty((0,5))#initialising final result
   for i in range(index):
     current=bbc_weather_scraper(url_list[i])#determining values for each url
+    coordinates=dutch_coordinates(current[0])
+    current=np.append(current, coordinates)
     stacked_results=np.vstack([stacked_results,current])#creating a matrix with weather data for all cities
   return stacked_results
+
+def map_generator(matrix):
+  '''
+  Function that creates a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. 
+
+
+  '''
+  netherlands_map = folium.Map(location=[52.3784, 4.9009], zoom_start=7)
+  index = len(matrix)
+  for i in range(index):
+    if(int(matrix[i][1])<10):
+      colour = 'blue'
+    else:
+      if (int(matrix[i][1])<20):
+        colour='green'
+      else:
+       colour ='red'
+    folium.Marker(
+        location=[matrix[i][3],matrix[i][4]],
+        popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Number is added to the popup
+        icon=folium.DivIcon(html=f'<div style="font-size: 16pt; color: {colour};">{matrix[i][1]}</div>')
+    ).add_to(netherlands_map)
+  netherlands_map.save("netherlands_map_with_numbers.html")
+  return
+  
+url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
+weather_matrix = weather_array_stacker(url_list)
+print(weather_matrix)
+map_generator(weather_matrix)
