@@ -74,12 +74,14 @@ def weather_array_stacker(url_list):
   Output: [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
   '''
   index=len(url_list)#determining number of rows in the matrix
-  stacked_results=[] #initialising stack of results
+  stacked_results=[]#initialising stack of results
+  if index == 0 or type(url_list) is not list:
+    raise ValueError('Invalid input')
   for i in range(index):
     #determining weather conditions for each url
     current=bbc_weather_scraper(url_list[i])
-    coordinates= dutch_coordinates(current[0]) #calculating coordiantes
-    current= current+coordinates #adding coordinates to the city row
+    coordinates=dutch_coordinates(current[0]) #calculating coordiantes
+    current=current+coordinates #adding coordinates to the city row
     stacked_results.append(current) #stacking matrix
   return stacked_results
 
@@ -129,4 +131,5 @@ def map_generator(url_list):
   return
 
 url_list = ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
+
 map_generator(url_list)
