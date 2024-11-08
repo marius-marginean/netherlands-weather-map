@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import folium
+import re
 
 def bbc_weather_scraper(url):
   """
@@ -114,7 +115,7 @@ def weather_array_stacker(url_list):
 
 def marker_colour(temperature):
   """
-  Determines the color of a marker on the weather map based on the temperature in degrees Celsius.
+ Determines the color of a marker on the weather map based on the temperature in degrees Celsius.
 
  The function assigns:
     - 'blue' for temperatures below 10 degrees,
@@ -160,7 +161,7 @@ def map_generator(url_list):
   Example:
       >>> map_generator(["https://www.bbc.com/weather/2988507", "https://www.bbc.com/weather/2759794"])
       # Creates 'netherlands_weather_map.html' with markers showing weather data for cities in the URLs.
-  """
+   """
   matrix = weather_array_stacker (url_list)
   netherlands_map = folium.Map(location=[52.3784, 4.9009], zoom_start=7)#location of the map
   index = len(matrix)#number of markers
@@ -178,3 +179,4 @@ def map_generator(url_list):
 url_list = ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
 
 map_generator(url_list)
+
