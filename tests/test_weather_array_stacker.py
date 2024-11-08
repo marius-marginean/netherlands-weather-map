@@ -75,24 +75,21 @@ def weather_array_stacker(url_list):
   Output: [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
   '''
   index=len(url_list)#determining number of rows in the matrix
-  stacked_results=np.empty((0,5))#initialising stack of results
+  stacked_results=[]#initialising stack of results
   for i in range(index):
     #determining weather conditions for each url
     current=bbc_weather_scraper(url_list[i])
-    coordinates=dutch_coordinates(current[0])#calculating coordiantes
-    current=np.append(current, coordinates)#adding coordinates to the city row
-    stacked_results=np.vstack([stacked_results,current])#stacking matrix
+    coordinates=dutch_coordinates(current[0]) #calculating coordiantes
+    current=current+coordinates #adding coordinates to the city row
+    stacked_results.append(current) #stacking matrix
   return stacked_results
 
 url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
 
-
 def test_weather_array_stacker():
   url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
   result =weather_array_stacker(url_list)
-  m,n= result.shape
-  assert m == 2
-  assert n == 5
-  
+  assert type(result[1][1]) is int
+  print(result)
 
 test_weather_array_stacker()
