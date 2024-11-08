@@ -144,3 +144,4 @@ def test_map_generator():
   os.remove("netherlands_weather_map.html")
   with pytest.raises(ValueError, match='Invalid input'):
    map_generator([])
+test_map_generator()#running the testing function so the file can be run as a standalone

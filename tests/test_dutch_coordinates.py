@@ -40,5 +40,6 @@ def test_dutch_coordinates():
     dutch_coordinates([])
   with pytest.raises(ValueError, match="Invalid input data type"):
     dutch_coordinates(901)
-test_dutch_coordinates()
+test_dutch_coordinates()#running the testing function so the file can be run as a standalone
+
   

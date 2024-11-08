@@ -54,7 +54,7 @@ def test_bbc_weather_scraper():
     bbc_weather_scraper([])
   with pytest.raises(ValueError, match='Location not found'):
     bbc_weather_scraper('https://www.bbc.com/weather/0488508')
-test_bbc_weather_scraper()
+test_bbc_weather_scraper()#running the testing function so the file can be run as a standalone
 
 
  

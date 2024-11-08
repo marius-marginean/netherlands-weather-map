@@ -30,3 +30,4 @@ def test_marker_colour():
     marker_colour([])
  with pytest.raises(ValueError, match="Invalid input data type"):
     marker_colour('cat')
+test_marker_colour()#running the testing function so the file can be run as a standalone

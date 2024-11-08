@@ -109,4 +109,4 @@ def test_weather_array_stacker():
     weather_array_stacker(url_list3)  
   with pytest.raises(ValueError, match='Invalid input'):
     weather_array_stacker([])
-test_weather_array_stacker()
+test_weather_array_stacker()#running the testing function so the file can be run as a standalone
