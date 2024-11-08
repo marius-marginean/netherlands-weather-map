@@ -40,7 +40,7 @@ def bbc_weather_scraper(url):
 
 def dutch_coordinates(city):
   '''
-  Function that uses a webscraper to determine the coordinates of a Dutch city from its name. 
+  Function that uses a webscraper to determine the coordinates of a Dutch city from its name. The function is not case sensitive and can deal with names composed of multiple words. 
   Input: Name of a city in The Netherlands as a string
   Output: Float array of coordinates in the decimal degree format : [Latitude,Longitude]
   Example:
@@ -76,6 +76,17 @@ def weather_array_stacker(url_list):
     stacked_results=np.vstack([stacked_results,current])#stacking matrix
   return stacked_results
 
+def marker_colour(temperature):
+  if(int(temperature)<10):
+      colour = 'blue'
+  else:
+      if (int(temperature)<20):
+        colour='green'
+      else:
+       colour ='red'
+  return marker_colour
+
+
 def map_generator(matrix):
   '''
   Function that uses folium to create a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. Displays the temperature in the correct location on the map. Colours number blue for temperature below 10 degrees Celsius, green for  under 20 degrees Celsius, and red for anything more. Clicking on the pop up provides information on weather conditions. Uses as an input the output of weather_array_stacker().
@@ -89,13 +100,7 @@ def map_generator(matrix):
   index = len(matrix)#number of markers
   for i in range(index):#creates a marker for each point
     #determines the colour of marker based on temperature
-    if(int(matrix[i][1])<10):
-      colour = 'blue'
-    else:
-      if (int(matrix[i][1])<20):
-        colour='green'
-      else:
-       colour ='red'
+    colour=marker_colour(matrix[i][1])
     folium.Marker(
         location=[matrix[i][3],matrix[i][4]],#places marker on coordinates
         popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Weather description is added to the pop up
