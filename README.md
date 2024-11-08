@@ -13,7 +13,7 @@ In order to run this program you need to have python intalled, download the repo
 '''bash
 weather_scraper.py
 '''
-As a list of suitable urls has already been provided so the map of the current weather should be generated in the netherlands-weather-map folder. It will appear under the name "netherlands_weather_map.html". In order to interact with this file, you need to open it in a browser from the folder. If you want to interact with this program, you can change the urls in the file weather_scraper.py, in the variable url_list to any other valid bbc weather urls of the indicated format and run the program using the same procedure. 
+A list of suitable urls has already been provided so the map of the current weather should be generated in the netherlands-weather-map folder. It will appear under the name "netherlands_weather_map.html". To interact with this file, you need to open it in a browser from the folder. If you want to change the cities on the map, you can change the urls in the file weather_scraper.py, in the variable url_list to any other valid bbc weather urls of the indicated format and run the program using the same procedure. 
 
 Example : 
 Input: 
