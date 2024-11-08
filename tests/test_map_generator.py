@@ -76,12 +76,14 @@ def weather_array_stacker(url_list):
   Output: [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
   '''
   index=len(url_list)#determining number of rows in the matrix
-  stacked_results=[] #initialising stack of results
+  stacked_results=[]#initialising stack of results
+  if index == 0 or type(url_list) is not list:
+    raise ValueError('Invalid input')
   for i in range(index):
     #determining weather conditions for each url
     current=bbc_weather_scraper(url_list[i])
-    coordinates= dutch_coordinates(current[0]) #calculating coordiantes
-    current= current+coordinates #adding coordinates to the city row
+    coordinates=dutch_coordinates(current[0]) #calculating coordiantes
+    current=current+coordinates #adding coordinates to the city row
     stacked_results.append(current) #stacking matrix
   return stacked_results
 
@@ -133,13 +135,12 @@ def map_generator(url_list):
 def test_map_generator():
   #testing if map is generated from the required information
   url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912"]
-  weather_matrix = weather_array_stacker(url_list)
-  map_generator(weather_matrix)
+  map_generator(url_list)
   assert os.path.exists("netherlands_weather_map.html")
   with open("netherlands_weather_map.html", "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
         assert "Amsterdam" in str(soup)
         assert "Haarlem" in str(soup)
   os.remove("netherlands_weather_map.html")
-  with pytest.raises(ValueError, match='Invalid website'):
+  with pytest.raises(ValueError, match='Invalid input'):
    map_generator([])

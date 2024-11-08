@@ -20,10 +20,12 @@ def marker_colour(temperature):
   return colour
 
 def test_marker_colour():
+ #testing normal functions
  assert marker_colour(5) == 'blue'
  assert marker_colour(15) == 'green'
  assert marker_colour(30) == 'red'
  assert marker_colour(-20) == 'blue'
+ #testing errors being raised correctly in edge cases
  with pytest.raises(ValueError, match="Invalid input data type"):
     marker_colour([])
  with pytest.raises(ValueError, match="Invalid input data type"):

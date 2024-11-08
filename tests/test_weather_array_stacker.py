@@ -75,6 +75,8 @@ def weather_array_stacker(url_list):
   '''
   index=len(url_list)#determining number of rows in the matrix
   stacked_results=[]#initialising stack of results
+  if index == 0 or type(url_list) is not list:
+    raise ValueError('Invalid input')
   for i in range(index):
     #determining weather conditions for each url
     current=bbc_weather_scraper(url_list[i])
@@ -105,6 +107,6 @@ def test_weather_array_stacker():
   url_list3=["https://www.cern.home"]
   with pytest.raises(ValueError, match='Invalid website'):
     weather_array_stacker(url_list3)  
-  with pytest.raises(ValueError, match='Invalid website'):
-    bbc_weather_scraper([])
+  with pytest.raises(ValueError, match='Invalid input'):
+    weather_array_stacker([])
 test_weather_array_stacker()

@@ -42,14 +42,19 @@ def bbc_weather_scraper(url):
   return results
 
 def test_bbc_weather_scraper():
+  #testing normal operation
   result = bbc_weather_scraper('https://www.bbc.com/weather/2988507')
   assert result[0] == 'Paris'
   assert type(result[1]) is int and result[1]>-100 and result[1]<70
   assert type(result[2]) is str
+  #testing if errors are raised correctly in edge cases
   with pytest.raises(ValueError, match='Invalid website'):
     bbc_weather_scraper('https://www.amazon.com/')
+  with pytest.raises(ValueError, match='Invalid website'):
+    bbc_weather_scraper([])
   with pytest.raises(ValueError, match='Location not found'):
     bbc_weather_scraper('https://www.bbc.com/weather/0488508')
+test_bbc_weather_scraper()
 
 
  

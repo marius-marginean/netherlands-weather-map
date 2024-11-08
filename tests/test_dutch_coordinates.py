@@ -28,10 +28,12 @@ def dutch_coordinates(city):
   return processed_cooridnates
 
 def test_dutch_coordinates():
+  #testing case independence 
   assert dutch_coordinates('the-hague') == [52.07667, 4.29861]
   assert dutch_coordinates('The-Hague') == [52.07667, 4.29861]
   assert dutch_coordinates('the hague') == [52.07667, 4.29861]
   assert dutch_coordinates('The Hague') == [52.07667, 4.29861]
+  #testing if errors are raised correctly
   with pytest.raises(ValueError, match="Error: Coordinates not found for astremdam"):
     dutch_coordinates("astremdam")
   with pytest.raises(ValueError, match="Invalid input data type"):
