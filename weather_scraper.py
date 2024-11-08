@@ -9,6 +9,7 @@ def bbc_weather_scraper(url):
 
   Input: 
   url(str) of the form : 'https://www.bbc.com/weather/xxxxxxx'.
+
   Output: 
   array of the fomr: [City(str), max_temp (int), description (str)] 
   
@@ -44,8 +45,10 @@ def bbc_weather_scraper(url):
 def dutch_coordinates(city):
   '''
   Function that uses a webscraper to determine the coordinates of a Dutch city from its name. The function is not case sensitive and can deal with names composed of multiple words. 
+
   Input: Name of a city in The Netherlands as a string
   Output: Float array of coordinates in the decimal degree format : [Latitude,Longitude]
+
   Example:
   Input: 'The Hague'
   Output: [52.07667, 4.29861]
@@ -88,8 +91,10 @@ def weather_array_stacker(url_list):
 def marker_colour(temperature):
   '''
   This function decides the colour of a marker on the weather map based on the temperature in degrees Celsius at that specific location. The marker will be blue for temperatures under 10 degrees, green for temperatures between 10 and 20 degrees and red for any temperature larger than that. 
+  
   Input:temperature(int)
   Output:marker colour(string)
+
   Example:
   Input: 30
   Output: 'red'
