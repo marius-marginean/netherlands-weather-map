@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import folium
-import re
 
 def bbc_weather_scraper(url):
   """
