@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import numpy as np
 import folium
 import re
 
@@ -106,7 +105,7 @@ def marker_colour(temperature):
 
 
 
-def map_generator(matrix):
+def map_generator(url_list):
   '''
   Function that uses folium to create a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. Displays the temperature in the correct location on the map. Colours number blue for temperature below 10 degrees Celsius, green for  under 20 degrees Celsius, and red for anything more, using the marker_colour() function. Clicking on the pop up provides information on weather conditions. Uses as an input the output of weather_array_stacker().
 
@@ -115,6 +114,7 @@ def map_generator(matrix):
   Output: 
   creates an html file named 'netherlands_weather_map.html' that can be opened in a separate web browser
   '''
+  matrix = weather_array_stacker (url_list)
   netherlands_map = folium.Map(location=[52.3784, 4.9009], zoom_start=7)#location of the map
   index = len(matrix)#number of markers
   for i in range(index):#creates a marker for each point
@@ -128,7 +128,5 @@ def map_generator(matrix):
   netherlands_map.save("netherlands_weather_map.html")#saves complete map
   return
 
-url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
-weather_matrix = weather_array_stacker(url_list)
-print(weather_matrix)
-map_generator(weather_matrix)
+url_list = ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
+map_generator(url_list)

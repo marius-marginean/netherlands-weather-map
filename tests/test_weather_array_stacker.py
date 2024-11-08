@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import numpy as np
 import re
 import pytest
 
@@ -102,7 +101,7 @@ def test_weather_array_stacker():
   result2 = weather_array_stacker(url_list2)
   assert type(result2) is list
   assert result1[0] == result2[0]
-  #testing if errors in called functions are raised correctly
+  #testing if errors in called functions are raised correctly in edge cases
   url_list3=["https://www.cern.home"]
   with pytest.raises(ValueError, match='Invalid website'):
     weather_array_stacker(url_list3)  
