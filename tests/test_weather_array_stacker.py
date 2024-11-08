@@ -84,51 +84,15 @@ def weather_array_stacker(url_list):
     stacked_results=np.vstack([stacked_results,current])#stacking matrix
   return stacked_results
 
-def marker_colour(temperature):
-  '''
-  This function decides the colour of a marker on the weather map based on the temperature in degrees Celsius at that specific location. The marker will be blue for temperatures under 10 degrees, green for temperatures between 10 and 20 degrees and red for any temperature larger than that. 
-  Input:temperature(int)
-  Output:marker colour(string)
-  Example:
-  Input: 30
-  Output: 'red'
- '''
-  if type(temperature) is not int:
-    raise ValueError("Invalid input data type")
-  if temperature<10:
-      colour = 'blue'
-  else:
-      if temperature<20:
-       colour='green'
-      else:
-       colour ='red'
-  return colour
+url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
 
 
+def test_weather_array_stacker():
+  url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
+  result =weather_array_stacker(url_list)
+  m,n= result.shape
+  assert m == 2
+  assert n == 5
+  
 
-def map_generator(matrix):
-  '''
-  Function that uses folium to create a map of The Netherlands where all of the cities are assigned their corresponding temperature and weather descriptions. Displays the temperature in the correct location on the map. Colours number blue for temperature below 10 degrees Celsius, green for  under 20 degrees Celsius, and red for anything more, using the marker_colour() function. Clicking on the pop up provides information on weather conditions. Uses as an input the output of weather_array_stacker().
-
-  Input: 
-  A matrix of the form [[City1(str), temp_max1(int), weather1(str), latitude1(float), longitute1(float)],[City2(str), temp_max2(int), weather2(str), latitude2(float), longitute2(float)]]
-  Output: 
-  creates an html file named 'netherlands_weather_map.html' that can be opened in a separate web browser
-  '''
-  netherlands_map = folium.Map(location=[52.3784, 4.9009], zoom_start=7)#location of the map
-  index = len(matrix)#number of markers
-  for i in range(index):#creates a marker for each point
-    #determines the colour of marker based on temperature
-    colour=marker_colour(int(matrix[i][1]))
-    folium.Marker(
-        location=[matrix[i][3],matrix[i][4]],#places marker on coordinates
-        popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Weather description is added to the pop up
-        icon=folium.DivIcon(html=f'<div style="font-size: 16pt; color: {colour};">{matrix[i][1]}</div>')#uses temperature as number icon of the correct colour
-    ).add_to(netherlands_map)
-  netherlands_map.save("netherlands_weather_map.html")#saves complete map
-  return
-
-url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
-weather_matrix = weather_array_stacker(url_list)
-print(weather_matrix)
-map_generator(weather_matrix)
+test_weather_array_stacker()
