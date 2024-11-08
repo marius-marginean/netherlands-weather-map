@@ -109,7 +109,6 @@ def map_generator(matrix):
   for i in range(index):#creates a marker for each point
     #determines the colour of marker based on temperature
     colour=marker_colour(int(matrix[i][1]))
-    print(colour)
     folium.Marker(
         location=[matrix[i][3],matrix[i][4]],#places marker on coordinates
         popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Weather description is added to the pop up
