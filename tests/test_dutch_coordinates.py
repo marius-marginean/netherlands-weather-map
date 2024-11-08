@@ -18,7 +18,7 @@ def dutch_coordinates(city):
   #determining coordinates
   url=f'https://www.geodatos.net/en/coordinates/netherlands/{city}'
   results =requests.get(url).text
-  doc= BeautifulSoup(results, "html.parser")
+  doc= BeautifulSoup(results, "html.parser"),
   unprocessed_coordinates=doc.find('p', class_='font-bold text-blue-500 mt-3 lg:text-lg')
   #processing coordinates into usable float array format
   if(unprocessed_coordinates) == None:
