@@ -85,14 +85,14 @@ def marker_colour(temperature):
   Input: 30
   Output: red
  '''
-  if(int(temperature)<10):
+  if temperature<10:
       colour = 'blue'
   else:
-      if (int(temperature)<20):
+      if temperature<20:
         colour='green'
       else:
        colour ='red'
-  return marker_colour
+  return colour
 
 
 def map_generator(matrix):
@@ -108,7 +108,8 @@ def map_generator(matrix):
   index = len(matrix)#number of markers
   for i in range(index):#creates a marker for each point
     #determines the colour of marker based on temperature
-    colour=marker_colour(matrix[i][1])
+    colour=marker_colour(int(matrix[i][1]))
+    print(colour)
     folium.Marker(
         location=[matrix[i][3],matrix[i][4]],#places marker on coordinates
         popup=f"{matrix[i][0]} - {matrix[i][1]} - {matrix[i][2]}",  # Weather description is added to the pop up
@@ -119,5 +120,5 @@ def map_generator(matrix):
   
 url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003","https://www.bbc.com/weather/2747373","https://www.bbc.com/weather/2745912",'https://www.bbc.com/weather/2743477','https://www.bbc.com/weather/2755420','https://www.bbc.com/weather/2759706','https://www.bbc.com/weather/2755251','https://www.bbc.com/weather/2751738','https://www.bbc.com/weather/2757220','https://www.bbc.com/weather/2756136']
 weather_matrix = weather_array_stacker(url_list)
-print(weather_matrix)
+#print(weather_matrix)
 map_generator(weather_matrix)
