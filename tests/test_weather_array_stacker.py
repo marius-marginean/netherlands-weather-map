@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import numpy as np
-import folium
 import re
+import pytest
 
 def bbc_weather_scraper(url):
   '''
@@ -85,9 +85,27 @@ def weather_array_stacker(url_list):
   return stacked_results
 
 def test_weather_array_stacker():
-  url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
-  result =weather_array_stacker(url_list)
-  assert type(result[1][1]) is int
-  print(result)
-
+  #test if function runs under normal conditions
+  url_list1= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"] 
+  result1 =weather_array_stacker(url_list1)
+  #testing shape
+  assert len(result1) == 2
+  assert len(result1[0][:]) == 5
+  #testing datatype
+  assert type(result1[1][0]) is str and type(result1[0][0]) is str
+  assert type(result1[1][1]) is int and type(result1[0][1]) is int
+  assert type(result1[1][2]) is str and type(result1[0][2]) is str
+  assert type(result1[1][3]) is float and type(result1[0][3]) is float
+  assert type(result1[1][4]) is float and type(result1[0][4]) is float
+  #testing if format remains consistent with docs for only one link as input
+  url_list2= ["https://www.bbc.com/weather/2759794"]
+  result2 = weather_array_stacker(url_list2)
+  assert type(result2) is list
+  assert result1[0] == result2[0]
+  #testing if errors in called functions are raised correctly
+  url_list3=["https://www.cern.home"]
+  with pytest.raises(ValueError, match='Invalid website'):
+    weather_array_stacker(url_list3)  
+  with pytest.raises(ValueError, match='Invalid website'):
+    bbc_weather_scraper([])
 test_weather_array_stacker()
