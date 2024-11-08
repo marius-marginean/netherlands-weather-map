@@ -84,8 +84,6 @@ def weather_array_stacker(url_list):
     stacked_results.append(current) #stacking matrix
   return stacked_results
 
-url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
-
 def test_weather_array_stacker():
   url_list= ["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/2755003"]
   result =weather_array_stacker(url_list)
