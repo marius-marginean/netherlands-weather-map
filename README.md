@@ -22,4 +22,5 @@ url_list=["https://www.bbc.com/weather/2759794","https://www.bbc.com/weather/275
 Output : 
 <img width="298" alt="image" src="https://github.com/user-attachments/assets/eca7dd72-9c02-430d-bba8-916778bb52d0">
 
+<img width="298" alt="image" src="pytest_results.png">
 
